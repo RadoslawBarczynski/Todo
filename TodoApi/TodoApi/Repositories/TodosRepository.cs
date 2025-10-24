@@ -1,5 +1,6 @@
 ﻿using TodoApi.Database;
 using TodoApi.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TodoApi.Repositories
 {
@@ -23,7 +24,13 @@ namespace TodoApi.Repositories
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            Todo result = _context.Todos.SingleOrDefault(x => x.id.Equals(id));
+
+            if (result != null)
+            {
+                _context.Todos.Remove(result);
+                _context.SaveChanges();
+            }
         }
 
         public Todo Get(Guid id)
@@ -31,14 +38,26 @@ namespace TodoApi.Repositories
             throw new NotImplementedException();
         }
 
-        public IQueryable<Todo> GetAllTodos()
+        public IQueryable<Todo> GetAllTodos(string filterDate)
         {
-            return _context.Todos.AsQueryable();
+            DateOnly formatedFilter = DateOnly.ParseExact(filterDate, "yyyy-MM-dd");
+
+            return _context.Todos
+                .Where(t => t.Date == formatedFilter)
+                .AsQueryable();
         }
 
-        public void Update(Guid id, Todo student)
+        public void Update(Todo todo)
         {
-            throw new NotImplementedException();
+            Todo result = _context.Todos.SingleOrDefault(x => x.id.Equals(todo.id));
+
+            if(result != null)
+            {
+                result.Description = todo.Description;
+                result.Date = todo.Date;
+
+                _context.SaveChanges();
+            }
         }
     }
 }

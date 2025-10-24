@@ -8,11 +8,11 @@ namespace TodoApi.Models
     public class Todo
     {
         [Key]
-        public Guid id { get; set; }
+        public Guid? id { get; set; }
         public DateTime Created_at { get; set; }
 
         public string Description { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
     }
 }

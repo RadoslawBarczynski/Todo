@@ -20,9 +20,9 @@ namespace TodoApi.Controllers
 
         [HttpGet]
         [Route("GetTodos")]
-        public JsonResult GetTodos()
+        public JsonResult GetTodos(string filterDate)
         {
-            return new JsonResult(_todosRepository.GetAllTodos());
+            return new JsonResult(_todosRepository.GetAllTodos(filterDate));
         }
 
         [HttpPost("AddTodo")]
@@ -32,6 +32,26 @@ namespace TodoApi.Controllers
             todo = JsonConvert.DeserializeObject<Todo>(jsonTodo);
 
             _todosRepository.Add(todo);
+
+            return Ok(jsonTodo);
+        }
+
+        [HttpPost("DeleteTodo")]
+        public IActionResult DeleteTodo([FromForm] Guid jsonId)
+        {
+            Guid id = jsonId;
+
+            _todosRepository.Delete(id);
+
+            return Ok(jsonId);
+        }
+
+        [HttpPost("UpdateTodo")]
+        public IActionResult UpdateTodo([FromForm] string jsonTodo)
+        {
+            Todo todo = JsonConvert.DeserializeObject<Todo>(jsonTodo);
+
+            _todosRepository.Update(todo);
 
             return Ok(jsonTodo);
         }

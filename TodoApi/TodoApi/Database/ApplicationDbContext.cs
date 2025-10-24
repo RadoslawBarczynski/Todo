@@ -13,7 +13,7 @@ namespace TodoApi.Database
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {      
         }
 
         public DbSet<Todo> Todos { get; set; }
