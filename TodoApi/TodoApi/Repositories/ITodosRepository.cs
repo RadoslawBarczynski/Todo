@@ -4,7 +4,7 @@ namespace TodoApi.Repositories
 {
     public interface ITodosRepository
     {
-        Todo Get(Guid id);
+        void CheckTodo(Guid id);
         IQueryable<Todo> GetAllTodos(string filterDate);
         void Add(Todo todo);
         void Update(Todo todo);

@@ -55,5 +55,15 @@ namespace TodoApi.Controllers
 
             return Ok(jsonTodo);
         }
+
+        [HttpPost("CheckTodo")]
+        public IActionResult CheckTodo([FromForm] Guid jsonId)
+        {
+            Guid id = jsonId;
+
+            _todosRepository.CheckTodo(id);
+
+            return Ok(jsonId);
+        }
     }
 }

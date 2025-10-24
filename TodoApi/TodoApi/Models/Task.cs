@@ -14,5 +14,6 @@ namespace TodoApi.Models
         public string Description { get; set; }
 
         public DateOnly Date { get; set; }
+        public bool CompletedP { get; set; }
     }
 }

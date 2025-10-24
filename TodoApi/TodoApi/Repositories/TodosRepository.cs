@@ -17,6 +17,7 @@ namespace TodoApi.Repositories
             Guid myuuid = Guid.NewGuid();
 
             todo.id = myuuid;
+            todo.Created_at = DateTime.UtcNow;
 
             _context.Todos.Add(todo);
             _context.SaveChanges();
@@ -33,9 +34,15 @@ namespace TodoApi.Repositories
             }
         }
 
-        public Todo Get(Guid id)
+        public void CheckTodo(Guid id)
         {
-            throw new NotImplementedException();
+            Todo result = _context.Todos.SingleOrDefault(x => x.id.Equals(id));
+
+            if (result != null)
+            {
+                result.CompletedP = !result.CompletedP;
+                _context.SaveChanges();
+            }
         }
 
         public IQueryable<Todo> GetAllTodos(string filterDate)
@@ -44,6 +51,7 @@ namespace TodoApi.Repositories
 
             return _context.Todos
                 .Where(t => t.Date == formatedFilter)
+                .OrderBy(o => o.Created_at)
                 .AsQueryable();
         }
 
