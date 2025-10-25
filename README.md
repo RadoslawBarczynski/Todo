@@ -15,7 +15,7 @@ Proste **API TODO** zbudowane w oparciu o **.NET8 Web API**, umożliwiające two
 2. Otwórz solucje projektu oraz wejdź:
  Tools → NuGet Package Manager → Manage NuGet Packages for Solution → Restore
 3. Utworzyc appsettings.json z connection stringiem do bazy:
-   ```json
+```
 {
   "ConnectionStrings": {
     "TodoDatabase": "[Baza danych]"
@@ -28,6 +28,7 @@ Proste **API TODO** zbudowane w oparciu o **.NET8 Web API**, umożliwiające two
   },
   "AllowedHosts": "*"
 }
+```
 5. Wybierz projekt startowy
 
 ## Dostępne endpointy
@@ -38,4 +39,5 @@ Proste **API TODO** zbudowane w oparciu o **.NET8 Web API**, umożliwiające two
 | AddTodo     | `/api/Todo/AddTodo`    | Dodanie nowego zadania            |
 | UpdateTodo  | `/api/Todo/UpdateTodo` | Aktualizacja istniejącego zadania |
 | DeleteTodo  | `/api/Todo/DeleteTodo` | Usunięcie zadania                 |
+
 
